@@ -1,2 +1,2 @@
 # Pseudo
-A Interpreter programming language that follows the syntax for CIE pseudocode
+A interpreted programming language (turing complete) that follows the syntax for CIE (iGCSE) pseudocode
