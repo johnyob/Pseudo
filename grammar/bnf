@@ -1,0 +1,127 @@
+USING BNF SYNTAX FROM AQA A-LEVEL COMPUTER SCIENCE
+
+<Declaration> ::= <Statement>
+                | <Class Declaration>
+                | <Function Declaration>
+                | <Variable Declaration>
+                | <Import>;
+
+<Import> ::= IMPORT <String>;
+
+<Class Declaration> ::= CLASS <Class Identifier> <Methods> ENDCLASS
+
+<Class Identifier> ::= <Identifier>
+                     | <Identifier> INHERITS <Identifier>;
+
+<Methods> ::= <Function Declaration>
+            | <Function Declaration> <Methods>;
+
+<Function Declaration> ::= FUNCTION <Identifier> (<Parameters>) ENDFUNCTION;
+
+<Parameters> ::= <Identifier>
+               | <Identifier>, <Parameters>;
+
+<Variable Declaration> ::= <Identifier> <- <Or>;
+
+<Statement> ::= <For Statement>
+              | <If Statement>
+              | <Output Statement>
+              | <Return Statement>
+              | <While Statement>
+              | <Expression>;
+
+<For Statement> ::= FOR <Identifier> <- <One Dimensional Arithmetic> (TO
+                  | DOWNTO) <One Dimensional Arithmetic> DO
+                      <Body>
+                    ENDFOR;
+
+<If Statement> ::= IF <Or> THEN <Body> ENDIF
+                 | IF <Or> THEN <Body> ELSE <Body> ENDIF;
+
+<Output Statement> ::= OUTPUT <Expression>;
+
+<Return Statement> ::= RETURN | RETURN <Expression>;
+
+<While Statement> ::= WHILE <Or> DO
+                        <Body>
+                      ENDWHILE;
+
+<Body> ::= <Declaration>
+         | <Declaration> <Body>;
+
+<Expression> ::= <Assignment>;
+
+<Assignment> ::= <Or>
+               | (<Variable>
+               | <Primary> <Get>
+               | <Function Call> [<Indices>]) <- <Or>;
+
+<Or> ::= <And>
+       | <And> OR <And>;
+
+<And> ::= <Equality>
+        | <Equality> AND <Equality>;
+
+<Equality> ::= <Comparison>
+             | <Comparison> (<> | =) <Comparison>;
+
+<Comparison> ::= <One Dimensional Arithmetic>
+               | <One Dimensional Arithmetic> (>
+               | >=
+               | <
+               | <=) <One Dimensional Arithmetic>;
+
+<One Dimensional Arithmetic> ::= <Two Dimensional Arithmetic>
+                               | <Two Dimensional Arithmetic> (+
+                               | -) <Two Dimensional Arithmetic>;
+
+<Two Dimensional Arithmetic> ::= <Unary>
+                               | <Unary> (* | /) <Unary>;
+
+<Unary> ::= <Index>
+          | (NOT | -) <Unary>;
+
+<Index> ::= <Function Call>
+          | <Function Call> [<Indices>];
+
+<Indices> ::= <Function Call>
+            | <Function Call> , <Indices>;
+
+<Function Call> ::= <Primary>
+                  | <Primary> <Call>
+                  | <Primary> <Get>;
+
+<Call> ::= (<Arguments>)
+         | (<Arguments>) <Call>;
+
+<Arguments> ::= <Or>
+              | <Or>, <Arguments>;
+
+<Get> ::= . <Identifier>
+        | . <Identifier> <Get>;
+
+<Primary> ::= <Literal>
+            | <Super>
+            | <This>
+            | <List>
+            | <Variable>
+            | <Grouping>;
+
+<Literal> ::= <Number>
+            | <String>
+            | TRUE
+            | FALSE
+            | NULL;
+
+<Super> ::= SUPER. <Identifier>;
+
+<This> ::= THIS;
+
+<List> ::= {<ListValues>};
+
+<ListValues> ::= <Or>
+               | <Or>, <ListValues>;
+
+<Variable> ::= <Identifier>;
+
+<Grouping> ::= (<Expression>);
